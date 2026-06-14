@@ -2,8 +2,8 @@ blueprint:
   name: Zone disarm confirmation
   description: Ask whether to disarm the alarm when the user enters the zone
   domain: automation
-  source_url: https://github.com/home-assistant/core/blob/dev/homeassistant/components/automation/blueprints/notify_leaving_zone.yaml
-  author: Home Assistant
+  source_url: https://github.com/s2sebi/ha-blueprint/blob/main/ask_enter_zone.yaml
+  author: S2sebi (Home Assistant)
   input:
     person_entity:
       name: Person
@@ -40,7 +40,7 @@ conditions:
   condition: template
   # The first case handles leaving the Home zone which has a special state when zoning called 'home'.
   # The second case handles leaving all other zones.
-  value_template: "{{ zone_entity == 'zone.home' and trigger.from_state.state == 'home' and trigger.to_state.state != 'home' or trigger.from_state.state == zone_state and trigger.to_state.state != zone_state }}"
+  value_template: "{{ zone_entity == 'zone.home' and trigger.from_state.state != 'home' and trigger.to_state.state == 'home' or trigger.from_state.state != zone_state and trigger.to_state.state == zone_state }}"
 
 actions:
   - alias: "Notify that a person has left the zone"
@@ -48,3 +48,9 @@ actions:
     type: notify
     device_id: !input notify_device
     message: "{{ person_name }} has left {{ zone_state }}"
+  - alias: "Ask whether to disarm the alarm "
+    domain: turn_on
+    type: script
+    device_id: script.testwwww
+    message: "{{ person_name }} has enter {{ zone_state }}"
+
