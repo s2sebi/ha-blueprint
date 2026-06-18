@@ -3,6 +3,7 @@ blueprint:
   description: swiatlo ruch 2 warunki
   domain: automation
   source_url: https://github.com/s2sebi/ha-blueprint/blob/main/Motion_light_2condition.yaml
+  author: S2sebi (Home Assistant)  
   input:
     motion_entity:
       name: Czujnik ruchu
