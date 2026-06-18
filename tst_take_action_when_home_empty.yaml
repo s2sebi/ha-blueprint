@@ -1,0 +1,40 @@
+blueprint:
+  name: Take action when the last person leaves home
+  description: |
+    Take any action when the last person leaves home _(When you home becomes empty)_.
+  source_url: https://github.com/s2sebi/ha-blueprint/blob/main/tst_take_action_when_home_empty.yaml
+  author: S2sebi (Home Assistant)  
+  input:
+    zone_home:
+      name: Home name
+      description: Select the zone that represents where you leave
+      selector:
+        entity:
+          filter:
+            - domain: zone
+      default: "zone.home"
+    actions:
+      name: Actions
+      description: Add any action you want to perform once your home becomes empty here. _(A default action is provided that turns off all your lights)_
+      selector:
+        action:
+      default:
+        - service: alarm_control_panel.alarm_arm_away
+          target:
+            entity_id: alarm_control_panel.alarmo
+          data:
+          code: "97622103322402"            
+          alias: alarm_arm_away
+
+trigger:
+  - platform: state
+    entity_id:
+      - !input zone_home
+    from: null
+    to: "0"
+
+condition: []
+
+action: !input actions
+
+mode: single
