@@ -1,24 +1,24 @@
 blueprint:
-  name: Motion-activated Light (only when sun is up and someone at home)
-  description: Turn on a light when motion is detected.
+  name: swiatlo ruch 2 warunki
+  description: swiatlo ruch 2 warunki
   domain: automation
-  source_url: https://github.com/s2sebi/ha-blueprint/main/tst_light.yaml
+  source_url: https://github.com/s2sebi/ha-blueprint/main/Motion_light_2condition.yaml
   input:
     motion_entity:
-      name: Motion Sensor
+      name: Czujnik ruchu
       selector:
         entity:
           domain: binary_sensor
           device_class: motion
     light_target:
-      name: Light
+      name: Swiatło
       selector:
         target:
           entity:
             domain: light
     no_motion_wait:
-      name: Wait time
-      description: Time to leave the light on after last motion is detected.
+      name: Czas oczekiwania
+      description: Czas pozostawienia światła włączonego po wykryciu ostatniego ruchu.
       default: 120
       selector:
         number:
@@ -31,13 +31,12 @@ blueprint:
       selector:
         entity:
           domain: input_boolean
-    # numeric_state2:
-    #   name: Warunek2
-    #   description: drugi warunek
-    #   selector:
-    #     target:      
-    #       entity:
-    #         domain: input_boolean            
+    numeric_state2:
+      name: Warunek2
+      description: drugi warunek
+      selector:
+        entity:
+          domain: input_boolean        
 
 
 # If motion is detected within the delay,
@@ -55,9 +54,9 @@ condition:
   - condition: state
     entity_id: !input numeric_state1
     state: "on"
-  # - condition: numeric_state
-  #   entity_id: !input numeric_state2
-  #   state: "on"  
+  - condition: numeric_state
+    entity_id: !input numeric_state2
+    state: "on"  
 
 action:
   - alias: "Turn on the light"
