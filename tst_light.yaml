@@ -2,7 +2,7 @@ blueprint:
   name: Motion-activated Light (only when sun is up and someone at home)
   description: Turn on a light when motion is detected.
   domain: automation
-  source_url: https://github.com/s2sebi/ha-blueprint/blob/main/tst_light.yaml
+  source_url: https://github.com/s2sebi/ha-blueprint/main/tst_light.yaml
   input:
     motion_entity:
       name: Motion Sensor
