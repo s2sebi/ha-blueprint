@@ -25,7 +25,7 @@ blueprint:
           min: 0
           max: 3600
           unit_of_measurement: seconds
-    numeric_state:
+    numeric_state1:
       name: Warunek1
       description: pierwszy warunek
       selector:
@@ -54,7 +54,7 @@ trigger:
 
 condition:
   - condition: numeric_state
-    entity_id: !input numeric_state
+    entity_id: !input numeric_state1
     state: "on"
   # - condition: numeric_state
   #   entity_id: !input numeric_state2
