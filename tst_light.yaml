@@ -32,13 +32,14 @@ blueprint:
         target:      
           entity:
             domain: input_boolean
-    home_entity:
-      name: Home entity
-      description: This is typically "zone.home".
-      default: zone.home
+    numeric_state2:
+      name: Warunek2
+      description: drugi warunek
       selector:
-        entity:
-          domain: zone
+        target:      
+          entity:
+            domain: input_boolean            
+
 
 # If motion is detected within the delay,
 # we restart the script.
@@ -53,11 +54,11 @@ trigger:
 
 condition:
   - condition: numeric_state
-    entity_id: !input home_entity
-    above: 0
-  - condition: numeric_state
     entity_id: !input numeric_state1
-    below: 0
+    state: "on"
+  - condition: numeric_state
+    entity_id: !input numeric_state2
+    state: "on"  
 
 action:
   - alias: "Turn on the light"
