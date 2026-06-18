@@ -11,8 +11,16 @@ blueprint:
       selector:
         entity:
           filter:
-            - domain: zone
-      default: "zone.home"
+            - domain: person
+      # default: "zone.home"
+    # zone_home:
+    #   name: Home name
+    #   description: Select the zone that represents where you leave
+    #   selector:
+    #     entity:
+    #       filter:
+    #         - domain: zone
+    #   default: "zone.home"      
     actions:
       name: Actions
       description: Add any action you want to perform once your home becomes empty here. _(A default action is provided that turns off all your lights)_
@@ -32,6 +40,12 @@ trigger:
       - !input zone_home
     from: null
     to: "0"
+  - trigger: switch.turned_off
+    target:
+      entity_id: input_boolean.tst_arm
+    options:
+      behavior: each
+      for: "00:00:00"    
 
 condition: []
 
