@@ -2,7 +2,7 @@ blueprint:
   name: Zone disarm confirmation
   description: Ask whether to disarm the alarm when the user enters the zone
   domain: automation
-  source_url: https://github.com/s2sebi/tst_light.yaml
+  source_url: https://github.com/s2sebi/ha-blueprint/tst_light.yaml
   author: S2sebi (Home Assistant)
   input:
     person_entity:
