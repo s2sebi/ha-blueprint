@@ -55,7 +55,7 @@ condition:
   - condition: state
     entity_id: !input numeric_state1
     state: "on"
-  - condition: numeric_state
+  - condition: state
     entity_id: !input numeric_state2
     state: "on"  
 
