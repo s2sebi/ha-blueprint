@@ -32,13 +32,13 @@ blueprint:
         target:      
           entity:
             domain: input_boolean
-    numeric_state2:
-      name: Warunek2
-      description: drugi warunek
-      selector:
-        target:      
-          entity:
-            domain: input_boolean            
+    # numeric_state2:
+    #   name: Warunek2
+    #   description: drugi warunek
+    #   selector:
+    #     target:      
+    #       entity:
+    #         domain: input_boolean            
 
 
 # If motion is detected within the delay,
@@ -56,9 +56,9 @@ condition:
   - condition: numeric_state
     entity_id: !input numeric_state1
     state: "on"
-  - condition: numeric_state
-    entity_id: !input numeric_state2
-    state: "on"  
+  # - condition: numeric_state
+  #   entity_id: !input numeric_state2
+  #   state: "on"  
 
 action:
   - alias: "Turn on the light"
