@@ -25,7 +25,7 @@ blueprint:
           min: 0
           max: 3600
           unit_of_measurement: seconds
-    numeric_state1:
+    numeric_state:
       name: Warunek1
       description: pierwszy warunek
       selector:
