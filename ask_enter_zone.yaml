@@ -43,11 +43,11 @@ conditions:
   value_template: "{{ zone_entity == 'zone.home' and trigger.from_state.state != 'home' and trigger.to_state.state == 'home' or trigger.from_state.state != zone_state and trigger.to_state.state == zone_state }}"
 
 actions:
-  - alias: "Notify that a person has left the zone"
+  - alias: "Notify that a person has ENTER the zone"
     domain: mobile_app
     type: notify
     device_id: !input notify_device
-    message: "{{ person_name }} has left {{ zone_state }}"
+    message: "{{ person_name }} has ENTER {{ zone_state }}"
   # - alias: "Ask whether to disarm the alarm "
   #   domain: turn_on
   #   type: script
