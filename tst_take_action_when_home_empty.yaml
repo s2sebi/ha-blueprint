@@ -10,8 +10,8 @@ blueprint:
       description: Select the zone that represents where you leave
       selector:
         entity:
-          filter:
-            - domain: person
+          # filter:
+          #   - domain: person
       # default: "zone.home"
     # zone_home:
     #   name: Home name
