@@ -1,0 +1,76 @@
+blueprint:
+  name: swiatlo ruch binnary sensor 2 warunki
+  description: swiatlo ruch binnary sensor 2 warunki
+  domain: automation
+  source_url: https://github.com/s2sebi/ha-blueprint/blob/main/Binnary_light_2condition.yaml
+  author: S2sebi (Home Assistant)  
+  input:
+    motion_entity:
+      name: Czujnik ruchu
+      selector:
+        entity:
+          domain: binary_sensor
+          # device_class: motion
+    light_target:
+      name: Swiatło
+      selector:
+        target:
+          entity:
+            domain: light
+    no_motion_wait:
+      name: Czas oczekiwania
+      description: Czas pozostawienia światła włączonego po wykryciu ostatniego ruchu.
+      default: 120
+      selector:
+        number:
+          min: 0
+          max: 3600
+          unit_of_measurement: seconds
+    numeric_state1:
+      name: Warunek1
+      description: pierwszy warunek
+      selector:
+        entity:
+          domain: input_boolean
+    numeric_state2:
+      name: Warunek2
+      description: drugi warunek
+      selector:
+        entity:
+          domain: input_boolean        
+
+
+# If motion is detected within the delay,
+# we restart the script.
+mode: restart
+max_exceeded: silent
+
+trigger:
+  platform: state
+  entity_id: !input motion_entity
+  from: "off"
+  to: "on"
+
+condition:
+  - condition: state
+    entity_id: !input numeric_state1
+    state: "on"
+  - condition: state
+    entity_id: !input numeric_state2
+    state: "on"  
+
+action:
+  - alias: "Turn on the light"
+    service: light.turn_on
+    target: !input light_target
+  - alias: "Wait until there is no motion from device"
+    wait_for_trigger:
+      platform: state
+      entity_id: !input motion_entity
+      from: "on"
+      to: "off"
+  - alias: "Wait the number of seconds that has been set"
+    delay: !input no_motion_wait
+  - alias: "Turn off the light"
+    service: light.turn_off
+    target: !input light_target
