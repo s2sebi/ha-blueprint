@@ -54,7 +54,7 @@ trigger:
 
 condition:
   - condition: numeric_state
-    entity_id: !input numeric_state1
+    entity_id: !input numeric_state
     state: "on"
   # - condition: numeric_state
   #   entity_id: !input numeric_state2
